@@ -5,7 +5,6 @@ from modelos.contactos import Contacto
 from datos.conexion import Agenda
 
 
-
 validar = Validacion()
 
 db = Agenda()
@@ -71,7 +70,25 @@ def lista_contactos():
     run()
 
 
+def existen_contactos():
+
+    respuesta = db.existe_archivo()
+
+    if respuesta == False:
+        print()
+        print('No existe datos guardados, primero guarde contactos.')
+
+        print()
+        print('Pulse cualquier tecla para continuar.')
+        input()
+        print()
+
+        run()
+
+
 def buscar_contacto():
+
+    existen_contactos()
 
     os.system('clear')
     print('BUSCAR UN CONTACTO.')
@@ -98,9 +115,6 @@ def actualizar_contacto():
     db.listar_contactos()
 
     print()
-    print('Pulse cualquier tecla para continuar.')
-    input()
-    print()
 
     nombre = chequiar_datos('Inserte nombre del contacto a modificar :','nombre')
     print()
@@ -113,6 +127,9 @@ def actualizar_contacto():
     db.modificar_contacto(datos)
 
     print()
+    print('Contacto modificado correctamente.')
+
+    print()
     print('Pulse cualquier tecla para continuar.')
     input()
     print()
@@ -122,6 +139,8 @@ def actualizar_contacto():
 
 def borrar_contacto():
 
+    existen_contactos()
+
     os.system('clear')
     print('BORRAR CONTACTO.')
     print('*'*50)   
@@ -129,14 +148,13 @@ def borrar_contacto():
     db.listar_contactos()
 
     print()
-    print('Pulse cualquier tecla para continuar.')
-    input()
-    print()
 
     nombre = chequiar_datos('Inserte nombre del contacto a borrar :','nombre')
     print()
 
     db.elimiminar_contacto(nombre)
+
+    print('Contacto eliminado correctamente.')
 
     print()
     print('Pulse cualquier tecla para continuar.')

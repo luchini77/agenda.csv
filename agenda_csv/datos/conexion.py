@@ -14,6 +14,13 @@ class Agenda:
         pass
 
 
+    def existe_archivo(self):
+    
+        if not pathlib.Path(nombre_archivo).exists():
+            
+            return False
+
+
     def grabar(self, contacto):
 
         datos = [contacto.nombre,contacto.movil,contacto.email]
